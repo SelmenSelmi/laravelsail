@@ -40,7 +40,10 @@ class Posts extends Controller
 
         $post = PostModel::create($data);
 
-        return response()->json($post, 201);
+        if ($request->expectsJson()) {
+            return response()->json($post, 201);
+        }
+        return redirect('/post')->with('success', 'Post created successfully!');
     }
 
     /**
@@ -60,7 +63,7 @@ class Posts extends Controller
 
         $post->update($data);
 
-        return response()->json($post);
+        return redirect('/post')->with('success', 'Post updated successfully!');
     }
 
     /**
@@ -75,6 +78,6 @@ class Posts extends Controller
 
         $post->delete();
 
-        return response()->json(null, 204);
+        return redirect('/post')->with('success', 'Post deleted successfully!');
     }
 }
