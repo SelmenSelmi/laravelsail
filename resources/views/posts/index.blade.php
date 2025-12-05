@@ -26,7 +26,7 @@
             @endif
         });
     </script>
-
+    <h2>Welcome, {{ auth()->user()->email }}</h2>
     <form action="/logout" method="POST" style="margin-bottom: 20px;">
         @csrf
         <button type="submit">Logout</button>

@@ -52,6 +52,13 @@ services:
                 - '-p${DB_PASSWORD}'
             retries: 3
             timeout: 5s
+    jenkins:
+        image: 'jenkins/jenkins:lts'
+        ports:
+            - '8080:8080'
+            - '50000:50000'
+        networks:
+            - sail
     redis:
         image: 'redis:alpine'
         ports:
