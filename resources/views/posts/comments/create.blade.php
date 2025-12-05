@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/comments" method="POST">
+    <form action="/posts/comments" method="POST">
         @csrf
         <input type="hidden" name="post_id" value="{{ $post_id }}" />
         <label for="content">Comment Content</label>

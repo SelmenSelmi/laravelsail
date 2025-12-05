@@ -12,7 +12,7 @@ class CommentsController extends Controller
     {
         //
         $comments = Comments::all();
-        return redirect('/post/comments');
+        return redirect('/posts/comments');
         
     }
     public function show($id)
@@ -34,6 +34,8 @@ class CommentsController extends Controller
             );
             $comments -> fill($data);
             $comments -> save();
+            error_log('Comment created: ' . $comments->id);
+            return redirect('/post');
     }
 
     public function update(Request $request, $id)
