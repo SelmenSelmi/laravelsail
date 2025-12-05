@@ -17,4 +17,8 @@ class Posts extends Model
         'title',
         'content',
     ];
+    public function comments()
+    {
+        return $this->hasMany(Comments::class, 'post_id');
+    }
 }

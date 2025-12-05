@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Posts as PostsController;
 use App\Services\NasaApodService;
-
+use App\Models\Posts;
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 Route::get('/', function () {
@@ -56,4 +56,30 @@ Route::get('/posts/{id}/comments', function ($id) {
     $comments = \App\Models\Comments::where('post_id', $id)->get();
     return view('posts.comments.create', ['comments' => $comments, 'post_id' => $id]);
 });
+
+Route::get('/posts/{id}/comments/show', function ($id) {
+    // Get the post
+    $post = \App\Models\Posts::find($id);
+    
+    if (!$post) {
+        return redirect()->back()->with('error', 'Post not found');
+    }
+    
+    // Get comments for this specific post
+    $comments = \App\Models\Comments::where('post_id', $id)->get();
+    
+    // Debug: Check what we're getting
+    // dd([
+    //     'Post ID from URL' => $id,
+    //     'Post Found' => $post ? $post->title : 'No post',
+    //     'Comments Count' => $comments->count(),
+    //     'First Comment' => $comments->first(),
+    // ]);
+    
+    return view('posts.comments.index', [
+        'comments' => $comments,  // Collection of comments
+        'post' => $post,          // Single post object
+        'post_id' => $id          // Post ID from URL
+    ]);
+})->name('posts.comments.show');
 });

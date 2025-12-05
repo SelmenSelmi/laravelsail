@@ -10,10 +10,8 @@
     <form class="form" action="/post/{{ $post->id }}" method="POST">
         @csrf
         @method('PUT')
-        <label class="label" for="title">Post Title</label>
-        <input class="input" type="text" id="title" name="title" value="{{ $post->title }}" required />
-        <label class="label" for="content">Post Content</label>
-        <textarea class="textarea" id="content" name="content" required>{{ $post->content }}</textarea>
+        <label class="label" for="title">Comment Title</label>
+        <input class="input" type="text" id="content" name="content" value="{{ $post->content }}" required />
         <button class="button is-primary" type="submit">Update Post</button>
     </form>
 </body>

@@ -32,7 +32,7 @@
         @csrf
         <button class="button is-danger" type="submit">Logout</button>
     </form>
-    <button class="button is-primary" redirect="/post/create" onclick="window.location.href='/post/create'">Create New Post</button>
+    <button class="button is-primary" redirect="/post/create/" onclick="window.location.href='/post/create'">Create New Post</button>
     <h1>Posts</h1>
     <div class="columns">
 
@@ -47,7 +47,11 @@
                         <strong>{{ $post->title }}</strong><br>
                     </a>
                     <span>{{ $post->content }}</span>
-                    <button class="button is-link" onclick="window.location.href='/posts/{{ $post->id }}/comments'">View Comments</button>
+                    <div class="card-footer">
+                    <button class="button is-link" onclick="window.location.href='/posts/{{ $post->id }}/comments/show'">View Comments</button>
+                    <button class="button is-link ml-3" onclick="window.location.href='/posts/{{ $post->id }}/comments'">create</button>
+                
+                    </div>
                 </div>
             </div>
                 </div>
@@ -57,18 +61,19 @@
     @else
         <p>No posts found.</p>
     @endif
-    @php
-        $nasaImg = app(\App\Services\NasaApodService::class)->getImageUrl();
-    @endphp
-     @if($nasaImg)
-     <div class="card is-half is-offset-one-quarter">
-  <div class="card-image is-half is-offset-one-quarter">
-    <figure class="image">
-    <div style="margin-top:30px;">
-        <img src="{{ $nasaImg }}" alt="NASA APOD" style="max-width:100%;height:auto;" />
-    </div>
-    </figure>
-  </div>
-@endif
+     @php
+            $nasaImg = app(\App\Services\NasaApodService::class)->getImageUrl();
+        @endphp
+        
+        @if($nasaImg)
+            <div class="card" style="margin-top: 30px;">
+                <div class="card-content">
+                    <h2 class="title is-2">NASA Astronomy Picture of the Day</h2>
+                    <figure class="image">
+                        <img src="{{ $nasaImg }}" alt="NASA APOD" style="max-width:100%;height:auto;" />
+                    </figure>
+                </div>
+            </div>
+        @endif
 </body>
 </html>
