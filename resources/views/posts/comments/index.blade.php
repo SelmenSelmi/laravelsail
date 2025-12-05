@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Posts</title>
+    <title>comments</title>
     <!-- Add Toastr CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
@@ -33,21 +33,20 @@
         <button class="button is-danger" type="submit">Logout</button>
     </form>
     <button class="button is-primary" redirect="/post/create" onclick="window.location.href='/post/create'">Create New Post</button>
-    <h1>Posts</h1>
+    <h1>comments</h1>
     <div class="columns">
 
-    @if(isset($posts) && count($posts))
+    @if(isset($comments) && count($comments))
         <ul>
-            @foreach($posts as $post)
+            @foreach($comments as $comment)
                 <div class="column is-half is-offset-one-quarter">
             <div class="card">
              <div class="card-content">
                
-                    <a href="/post/{{ $post->id }}">
-                        <strong>{{ $post->title }}</strong><br>
+                    <a href="/post/{{ $comment->id }}">
+                        <strong>{{ $comment->title }}</strong><br>
                     </a>
-                    <span>{{ $post->content }}</span>
-                    <button class="button is-link" onclick="window.location.href='/posts/{{ $post->id }}/comments'">View Comments</button>
+                    <span>{{ $comment->content }}</span>
                 </div>
             </div>
                 </div>
@@ -55,7 +54,7 @@
         </ul>
     </div>
     @else
-        <p>No posts found.</p>
+        <p>No comments found.</p>
     @endif
     @php
         $nasaImg = app(\App\Services\NasaApodService::class)->getImageUrl();
